@@ -37,6 +37,7 @@ nohup.out
 .credentials
 migrate_seeds.log
 node_modules
+*.env
 
 
 /.bundle
