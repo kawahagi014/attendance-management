@@ -1,0 +1,55 @@
+- provide(:title, "勤怠履歴#{@days.first.strftime("%Y年%m月")}")
+.callender
+  %h1= "#{@days.first.strftime("%Y年%m月")}"
+  %p 翌日退勤の場合、退社時刻に*が記載されます。
+  %table.callender
+    %tr
+      %th 日付
+      %th 曜日
+      %th 出社時刻
+      %th 退社時刻
+      %th 休憩時間
+      %th 外出時間
+      %th 労働時間
+    - @days.each do |day|
+      %tr{:class => ('holiday' if check_holiday(day))}
+        %td= day.strftime("%m月%d日")
+        %td= convert_wday(day.wday)
+        %td
+        %td
+        %td
+        %td
+        %td
+      - @attendances.each do |attendance|
+        - if day.day == attendance.work_date.day
+          %tr{:class => ('holiday' if check_holiday(day))}
+            %td= day.strftime("%m月%d日")
+            %td= convert_wday(day.wday)
+            %td= attendance.start_time.strftime("%H:%M")
+            - if !attendance.end_time.nil? && (attendance.end_time.day != attendance.start_time.day)
+              %td= "*#{attendance.end_time.strftime("%H:%M")}"
+            - else
+              %td= attendance.end_time&.strftime("%H:%M")
+            %td= AttendancesController::REST_TIME
+            %td= attendance.rest_time
+            %td= attendance.work_time
+    %tr
+      %td
+      %td
+      %td
+      %td
+      %td 休憩時間合計
+      %td 外出時間合計
+      %td 勤務時間合計
+    %tr
+      %td
+      %td
+      %td
+      %td
+      %td= total_standerd_rest_time_calc
+      %td= total_rest_time_calc
+      %td= total_work_time_calc
+  .callender__link--container
+    %span= link_to "< #{@days.first.last_month.month}月", user_attendances_path(prev_cnt: @month_cnt)
+    %span= link_to '戻る', user_path(@user)
+    %span= link_to "#{@days.first.next_month.month}月 >", user_attendances_path(next_cnt: @month_cnt)

@@ -1,0 +1,23 @@
+- provide(:title, 'ユーザー登録')
+.createuser
+  = render 'shared/error_messages', contain_object: @user
+  %h1 ユーザー登録
+  .createuser__container
+    -# modelのバリデーションを適用したいため、html5標準のチェックを無効化
+    -# バリデーションメッセージ・labelはモデルのフィールド名に紐づいているため、日本語化が必要、config/locales/ja.yml
+    = form_with(model: @user, local: true, html: {novalidate: true}) do |f|
+      .createuser__item--container
+        .createuser__item--contents
+          = f.label :name, "氏名"
+          = f.text_field :name
+        .createuser__item--contents
+          = f.label :email, "メールアドレス"
+          = f.email_field :email
+        .createuser__item--contents
+          = f.label :password, "パスワード"
+          = f.password_field :password
+        .createuser__item--contents
+          = f.label :password_confirmation, "パスワード（確認）"
+          = f.password_field :password_confirmation
+        .createuser__item--contents
+          = f.submit "登録", class: "btn btn-primary"

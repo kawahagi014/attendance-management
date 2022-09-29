@@ -1,0 +1,8 @@
+- provide(:title,"Home")
+%h1 勤怠管理システム
+%h2 Home
+.home__button--container
+  %span{:class => ('disable' if logged_in?)}= link_to_if !logged_in?, "ユーザー登録", signup_path
+  %span{:class => ('disable' if logged_in?)}=  link_to_if !logged_in?, "ログイン", login_path
+  -if logged_in?
+    %span{:class => ('disable' if !logged_in?)}=  link_to_if logged_in?, "マイページ", user_path(current_user)

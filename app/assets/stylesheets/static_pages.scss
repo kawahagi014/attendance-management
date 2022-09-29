@@ -1,0 +1,27 @@
+.home {
+  &__button {
+    &--container {
+      display: flex;
+      justify-content: space-evenly;
+      list-style: none;
+      & span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: mediumblue;
+        height: 70px;
+        width: 80px;
+        cursor: pointer;
+        border-radius: 5px;
+        &.disable {
+          cursor: default;
+          background-color: gray;
+        }
+        & a {
+          text-decoration: none;
+          color: white;
+        }
+      }
+    }
+  }
+}

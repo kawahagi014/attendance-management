@@ -1,0 +1,47 @@
+.mypage {
+  margin: 0 auto;
+  &__container {
+    text-align: center;
+  }
+  &__button {
+    &--container {
+      display: flex;
+      justify-content: space-evenly;
+      list-style: none;
+    }
+    &--item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: mediumblue;
+      height: 50px;
+      width: 60px;
+      cursor: pointer;
+      border-radius: 5px;
+      &.disable {
+        cursor: default;
+        background-color: gray;
+      }
+      & a {
+        text-decoration: none;
+        color: white;
+      }
+    }
+  }
+}
+
+.createuser {
+  &__container {
+    display: inline-block;
+    text-align: right;
+  }
+  &__item {
+    &--contents {
+      margin-bottom: 30px;
+      & input.btn {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+}

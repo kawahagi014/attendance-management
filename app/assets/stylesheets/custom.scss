@@ -1,0 +1,42 @@
+body {
+  margin: 0 10%;
+}
+
+input {
+  border: solid 1px;
+}
+
+.container {
+  text-align: center;
+}
+
+/* miscellaneous */
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  text-align: left;
+}
+
+/* alert */
+.alert.alert-danger {
+  display: flex;
+  justify-content: center;
+  color: red;
+}
+
+#error_explanation {
+  color: red;
+  & ul {
+    text-align: left;
+    display: inline-block;
+  }
+}
+
+.field_with_errors {
+  display: inline-block;
+  & input {
+    border: solid 1px red;
+  }
+}

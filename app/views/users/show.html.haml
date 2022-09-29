@@ -1,0 +1,21 @@
+- provide(:title, "マイページ")
+.mypage
+  .mypage__container
+    -unless @attendance.nil?
+      = render 'shared/error_messages', contain_object: @attendance
+    .mypage__title
+      %h1 マイページ
+    .mypege__info
+      = @user.name
+    .mypage__time
+      %p= "今日は#{@date.year}年#{@date.month}月#{@date.day}日です"
+    .mypage__status
+      %p= disp_status
+    .mypage__button
+      %ol.mypage__button--container
+        %li.mypage__button--item{:class => ('disable' if button_controll != 0)}= link_to_if button_controll == 0, '出勤', user_attendances_path(@user), method: :create
+        -unless @attendance.nil?
+          %li.mypage__button--item{:class => ('disable' if button_controll != 1)}= link_to_if button_controll == 1, '外出', update_rest_start_user_attendance_path(@user,@attendance), method: :patch
+          %li.mypage__button--item{:class => ('disable' if button_controll != 2)}= link_to_if button_controll == 2, '戻り',  update_rest_end_user_attendance_path(@user,@attendance), method: :patch
+          %li.mypage__button--item{:class => ('disable' if button_controll != 1)}= link_to_if button_controll == 1, '退勤', update_work_end_user_attendance_path(@user,@attendance), method: :patch
+          %li.mypage__button--item= link_to '勤務表確認', user_attendances_path(@user)

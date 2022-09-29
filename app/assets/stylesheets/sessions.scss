@@ -1,0 +1,22 @@
+.login {
+  &__form--area {
+    display: inline-block;
+    text-align: right;
+  }
+  &__form--content {
+    margin-bottom: 30px;
+    & input.btn {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  &__ancer {
+    text-align: center;
+  }
+}
+
+.createuser {
+  &__item {
+    display: block;
+  }
+}

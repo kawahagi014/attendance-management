@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  work_date: 2022-09-25
+  start_time: 2022-09-25 18:26:03
+  end_time: 2022-09-25 18:26:03
+  rest_flg: false
+
+two:
+  work_date: 2022-09-25
+  start_time: 2022-09-25 18:26:03
+  end_time: 2022-09-25 18:26:03
+  rest_flg: false

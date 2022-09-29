@@ -1,0 +1,11 @@
+%body
+  %header.header
+    .header__container
+      .header__title
+        %p 勤怠管理システム
+      - if logged_in?
+        .header__link-logout
+          = link_to "Log out", logout_path, method: :delete
+      - else
+        .header__link-login
+          = link_to "Log in", login_path

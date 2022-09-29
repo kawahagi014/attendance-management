@@ -1,0 +1,16 @@
+- provide(:title, "ログイン")
+.login
+  .login__container
+    %h1.login__title ログイン
+    .login__form--area
+      = form_with(url: login_path, scope: :session, local: true) do |f|
+        .login__form--content
+          = f.label :email, 'メールアドレス'
+          = f.email_field :email, class: 'form-control'
+        .login__form--content
+          = f.label :password, 'パスワード'
+          = f.password_field :password, class: 'form-control'
+        .login__form--content
+          = f.submit "ログイン", class: "btn btn-primary"
+  - unless logged_in?
+    .login__ancer= link_to "新規登録はこちら", signup_path
