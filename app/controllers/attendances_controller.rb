@@ -1,18 +1,9 @@
 class AttendancesController < ApplicationController
-  #所定休憩時間
-  REST_TIME = 1.0
+  #固定休憩時間
+  FIXED_REST_TIME = 1.0
 
   def index
-    @month_cnt =
-    if params[:next_cnt].present?
-      params[:next_cnt].to_i + 1
-    elsif params[:prev_cnt].present?
-      params[:prev_cnt].to_i - 1
-    else
-      0
-    end
-
-    @days = Date.today.months_since(@month_cnt).all_month
+    @days = Date.today.months_since(month_calc).all_month
     @user = User.find(session[:user_id])
     @attendances = @user.attendances.where(:work_date.gte => @days.first, :work_date.lte => @days.last).to_a
   end
@@ -28,8 +19,7 @@ class AttendancesController < ApplicationController
     if @attendance.save
       redirect_to @user
     else
-      flash.now[:danger] = @attendance.errors.full_messages
-      render @user
+      render 'users/show'
     end
   end
 
@@ -38,13 +28,12 @@ class AttendancesController < ApplicationController
     @user = User.find(session[:user_id])
     @attendance = @user.attendances.all.sort(work_date: -1).first
     @attendance.end_time = Time.now
-    @attendance.work_time = convert_hour(Time.now - @attendance.start_time) - REST_TIME
+    @attendance.work_time = convert_hour(Time.now - @attendance.start_time) - @attendance.rest_time - FIXED_REST_TIME
     @attendance.status_flg = 3
     if @attendance.save
       redirect_to @user
     else
-      flash.now[:danger] = @attendance.errors.full_messages
-      render @user
+      render 'user/show'
     end
   end
 
@@ -57,8 +46,7 @@ class AttendancesController < ApplicationController
     if @attendance.save
       redirect_to @user
     else
-      flash.now[:danger] = @attendance.errors.full_messages
-      render @user
+      render 'user/show'
     end
   end
 
@@ -72,8 +60,7 @@ class AttendancesController < ApplicationController
     if @attendance.save
       redirect_to @user
     else
-      flash.now[:danger] = @attendance.errors.full_messages
-      render @user
+      render 'user/show'
     end
   end
 
@@ -81,5 +68,17 @@ class AttendancesController < ApplicationController
   #Time→時.分への変換処理
   def convert_hour(time)
     hour = (time / 60 / 60).floor(2)
+  end
+
+  #index表示月の加減値算出
+  def month_calc
+    @month_cnt =
+    if params[:next_cnt].present?
+      params[:next_cnt].to_i + 1
+    elsif params[:prev_cnt].present?
+      params[:prev_cnt].to_i - 1
+    else
+      0
+    end
   end
 end

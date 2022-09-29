@@ -26,11 +26,11 @@
             %td= day.strftime("%m月%d日")
             %td= convert_wday(day.wday)
             %td= attendance.start_time.strftime("%H:%M")
-            - if !attendance.end_time.nil? && (attendance.end_time.day != attendance.start_time.day)
+            - if attendance&.end_time && (attendance.end_time.day != attendance.start_time.day)
               %td= "*#{attendance.end_time.strftime("%H:%M")}"
             - else
               %td= attendance.end_time&.strftime("%H:%M")
-            %td= AttendancesController::REST_TIME
+            %td= AttendancesController::FIXED_REST_TIME
             %td= attendance.rest_time
             %td= attendance.work_time
     %tr

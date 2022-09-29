@@ -1,7 +1,7 @@
 - provide(:title, "マイページ")
 .mypage
   .mypage__container
-    -unless @attendance.nil?
+    -if @attendance&.errors&.full_messages
       = render 'shared/error_messages', contain_object: @attendance
     .mypage__title
       %h1 マイページ

@@ -1,7 +1,7 @@
 module AttendanceHelper
   #休憩時間の月合計
   def total_standerd_rest_time_calc
-    total_standerd_rest_time = AttendancesController::REST_TIME * @attendances.length
+    total_standerd_rest_time = AttendancesController::FIXED_REST_TIME * @attendances.length
     return total_standerd_rest_time
   end
 
