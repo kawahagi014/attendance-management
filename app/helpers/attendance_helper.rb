@@ -1,11 +1,11 @@
 module AttendanceHelper
-  #休憩時間の月合計
+  # 休憩時間の月合計
   def total_standerd_rest_time_calc
     total_standerd_rest_time = AttendancesController::FIXED_REST_TIME * @attendances.length
     return total_standerd_rest_time
   end
 
-  #外出時間の月合計
+  # 外出時間の月合計
   def total_rest_time_calc
     total_rest_time = 0
     @attendances.each do |attendance|
@@ -14,7 +14,7 @@ module AttendanceHelper
     return total_rest_time
   end
 
-  #労働時間の月合計
+  # 労働時間の月合計
   def total_work_time_calc
     total_work_time = 0
     @attendances.each do |attendance|
