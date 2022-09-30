@@ -12,14 +12,6 @@
       %th 外出時間
       %th 労働時間
     - @days.each do |day|
-      %tr{:class => ('holiday' if check_holiday(day))}
-        %td= day.strftime("%m月%d日")
-        %td= convert_wday(day.wday)
-        %td
-        %td
-        %td
-        %td
-        %td
       - @attendances.each do |attendance|
         - if day.day == attendance.work_date.day
           %tr{:class => ('holiday' if check_holiday(day))}
@@ -33,6 +25,15 @@
             %td= AttendancesController::FIXED_REST_TIME
             %td= attendance.rest_time
             %td= attendance.work_time
+        - else
+          %tr{:class => ('holiday' if check_holiday(day))}
+            %td= day.strftime("%m月%d日")
+            %td= convert_wday(day.wday)
+            %td
+            %td
+            %td
+            %td
+            %td
     %tr
       %td
       %td
