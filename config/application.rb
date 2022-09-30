@@ -14,6 +14,7 @@ require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
 require "rails/test_unit/railtie"
+require 'i18n/backend/fallbacks'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -31,6 +32,7 @@ module RailsAttendance
     #
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml').to_s]
+    config.i18n.fallbacks = {'ja' => 'en'}
     config.time_zone = 'Tokyo'
     # config.eager_load_paths << Rails.root.join("extras")
 
