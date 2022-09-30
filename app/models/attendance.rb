@@ -11,7 +11,7 @@ class Attendance
   field :rest_start_time, type: Array, default: []
   field :rest_end_time, type: Array, default: []
   field :rest_time, type: Integer, default: 0
-  #1:出勤中 2:休憩中 3:退勤
+  # 1:出勤中 2:休憩中 3:退勤
   field :status_flg, type: Integer
 
   validates :user_id, presence: true

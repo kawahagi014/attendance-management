@@ -1,9 +1,8 @@
-#test_helperを読み込み、同ファイル内のメソッドはテスト全体で利用可能
+# test_helperを読み込み、同ファイル内のメソッドはテスト全体で利用可能
 require "test_helper"
 
 class StaticPagesControllerTest < ActionDispatch::IntegrationTest
-
-  #必ず最初に実行する処理
+  # 必ず最初に実行する処理
   def setup
     @base_title = "勤怠管理システム"
   end

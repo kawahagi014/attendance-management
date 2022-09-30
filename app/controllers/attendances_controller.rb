@@ -1,5 +1,5 @@
 class AttendancesController < ApplicationController
-  #固定休憩時間
+  # 固定休憩時間
   FIXED_REST_TIME = 1.0
 
   def index
@@ -8,7 +8,7 @@ class AttendancesController < ApplicationController
     @attendances = @user.attendances.where(:work_date.gte => @days.first, :work_date.lte => @days.last).to_a
   end
 
-  #出勤時
+  # 出勤時
   def create
     @user = User.find(session[:user_id])
     @attendance = Attendance.new
@@ -19,11 +19,11 @@ class AttendancesController < ApplicationController
     if @attendance.save
       redirect_to @user
     else
-      render 'users/show'
+      render "users/show"
     end
   end
 
-  #退勤時
+  # 退勤時
   def update_work_end
     @user = User.find(session[:user_id])
     @attendance = @user.attendances.all.sort(work_date: -1).first
@@ -33,11 +33,11 @@ class AttendancesController < ApplicationController
     if @attendance.save
       redirect_to @user
     else
-      render 'user/show'
+      render "user/show"
     end
   end
 
-  #休憩開始時
+  # 休憩開始時
   def update_rest_start
     @user = User.find(session[:user_id])
     @attendance = @user.attendances.all.sort(work_date: -1).first
@@ -46,11 +46,11 @@ class AttendancesController < ApplicationController
     if @attendance.save
       redirect_to @user
     else
-      render 'user/show'
+      render "user/show"
     end
   end
 
-  #休憩終了時
+  # 休憩終了時
   def update_rest_end
     @user = User.find(session[:user_id])
     @attendance = @user.attendances.all.sort(work_date: -1).first
@@ -60,25 +60,26 @@ class AttendancesController < ApplicationController
     if @attendance.save
       redirect_to @user
     else
-      render 'user/show'
+      render "user/show"
     end
   end
 
-  private
-  #Time→時.分への変換処理
+private
+
+  # Time→時.分への変換処理
   def convert_hour(time)
     hour = (time / 60 / 60).floor(2)
   end
 
-  #index表示月の加減値算出
+  # index表示月の加減値算出
   def month_calc
     @month_cnt =
-    if params[:next_cnt].present?
-      params[:next_cnt].to_i + 1
-    elsif params[:prev_cnt].present?
-      params[:prev_cnt].to_i - 1
-    else
-      0
-    end
+      if params[:next_cnt].present?
+        params[:next_cnt].to_i + 1
+      elsif params[:prev_cnt].present?
+        params[:prev_cnt].to_i - 1
+      else
+        0
+      end
   end
 end

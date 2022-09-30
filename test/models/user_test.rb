@@ -1,9 +1,9 @@
-require 'test_helper'
+require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   def setup
     @user = User.new(name: "Example User", email: "user@example.com",
-      password: "foobar", password_confirmation: "foobar")
+                     password: "foobar", password_confirmation: "foobar")
   end
 
   test "should be valid" do
@@ -26,7 +26,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "email should not be too long" do
-    @user.email = "a" * 244 + "@example.com"
+    @user.email = ("a" * 244) + "@example.com"
     assert_not @user.valid?
   end
 
@@ -41,7 +41,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "email addresses should be unique" do
     duplicate_user = @user.dup
-    #メールアドレスは重複を区別しない
+    # メールアドレスは重複を区別しない
     duplicate_user.email = @user.email.upcase
     @user.save
     assert_not duplicate_user.valid?
@@ -53,7 +53,7 @@ class UserTest < ActiveSupport::TestCase
     p @user
     @user.save
     assert_equal mixed_case_email.downcase, @user.reload.email
-    #第一引数で@userのEmailを小文字に変換、第二引数でDBからEmail(大文字小文字混同のemail)を再読み込み、この二つが同一であればtrueを返す
+    # 第一引数で@userのEmailを小文字に変換、第二引数でDBからEmail(大文字小文字混同のemail)を再読み込み、この二つが同一であればtrueを返す
   end
 
   test "password should be present (nonblank)" do
